@@ -25,10 +25,13 @@ help:
 # -----------------------------------------------------------------------------
 
 build-base:
-	@cd base; docker build -t base .
+	@cd images/base; docker build -t base .
 
 build-vivado-2016-1:
-	@cd xilinx-vivado/2016-1; docker build -t vivado/2016-1 .
+	@cd images/xilinx-vivado/2016-1; docker build -t vivado/2016-1 .
+
+build-taskjuggler:
+	@cd images/taskjuggler; docker build -t taskjuggler .
 
 # -----------------------------------------------------------------------------
 # Run Targets
@@ -36,13 +39,18 @@ build-vivado-2016-1:
 
 run-base:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
-	--volume="/Users/$(USER)/docker/tmp:/home/$(USER):rw" \
+	--volume="/Users/$(USER)/siglogic/docker/tmp:/home/$(USER):rw" \
 	-e DISPLAY=$(IP):0 base tcsh
 
 run-vivado-2016-1:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
-	--volume="/Users/$(USER)/docker/tmp:/home/$(USER):rw" \
+	--volume="/Users/$(USER)/siglogic/docker/tmp:/home/$(USER):rw" \
 	-e DISPLAY=$(IP):0 vivado/2016-1 tcsh
+
+run-taskjuggler:
+	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
+	--volume="/Users/$(USER)/siglogic/docker/tmp:/home/$(USER):rw" \
+	-e DISPLAY=$(IP):0 taskjuggler tcsh
 
 # -----------------------------------------------------------------------------
 # Misc Targets
