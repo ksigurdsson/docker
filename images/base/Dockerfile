@@ -1,6 +1,10 @@
 FROM ubuntu:14.04
-RUN apt-get -y update
-RUN apt-get install -y tcsh
+
+# Install required packages
+RUN apt-get -y update && apt-get install -y \
+    tcsh \
+    nano \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create the staff group
 #RUN addgroup --gid 20 staff
