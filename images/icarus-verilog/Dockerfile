@@ -1,0 +1,27 @@
+FROM base
+
+# Install required packages
+# Icarus requires autoconf, gperf, flex, bison
+# Need xorg to launch gui apps
+# Need git to download Icarus source
+RUN apt-get -y update && apt-get install -y \
+    build-essential \
+    autoconf \
+    gperf \
+    flex \
+    bison \
+    git \
+    xorg \
+    gtkwave \
+    && rm -rf /var/lib/apt/lists/
+
+# Download and build Icarus Verilog
+RUN mkdir /install \
+    && git clone https://github.com/steveicarus/iverilog.git \
+    && cd iverilog \
+    && sh autoconf.sh \
+    && ./configure \
+    && make \
+    && make install \
+    && cd / \
+    && rm -rf /install
