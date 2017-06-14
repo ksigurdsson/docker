@@ -39,8 +39,23 @@ build-taskjuggler:
 build-icarus:
 	@cd images/icarus-verilog; docker build -t icarus-verilog .
 
+build-sigrok:
+	@cd images/sigrok; docker build -t sigrok .
+
 serve-src:
 	@cd images/src; python3.4 -m http.server --bind $(IP) 8000
+
+# -----------------------------------------------------------------------------
+# Docker Mahine Targets
+# -----------------------------------------------------------------------------
+
+start:
+	@docker-machine start main
+	@docker-machine env main --shell=tcsh
+
+stop:
+	@docker-machine stop main
+
 # -----------------------------------------------------------------------------
 # Run Targets
 # -----------------------------------------------------------------------------
@@ -66,6 +81,11 @@ run-taskjuggler:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
 	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
 	-e DISPLAY=$(IP):0 taskjuggler tcsh
+
+run-sigrok:
+	@docker run -it --rm --privileged -v /dev/bus/usb:/dev/bus/usb --workdir="/home/$(USER)" \
+	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
+	-e DISPLAY=$(IP):0 sigrok tcsh
 
 # -----------------------------------------------------------------------------
 # Misc Targets
