@@ -36,6 +36,9 @@ build-vivado-2016-3:
 build-taskjuggler:
 	@cd images/taskjuggler; docker build -t taskjuggler .
 
+build-asciidoctor:
+	@cd images/asciidoctor; docker build -t asciidoctor .
+
 build-icarus:
 	@cd images/icarus-verilog; docker build -t icarus-verilog .
 
@@ -81,6 +84,12 @@ run-taskjuggler:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
 	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
 	-e DISPLAY=$(IP):0 taskjuggler tcsh
+
+run-asciidoctor:
+	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
+	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
+	--volume="/Users/$(USER)/siglogic/asic-project:/home/$(USER)/asic-project:rw" \
+	-e DISPLAY=$(IP):0 asciidoctor tcsh
 
 run-sigrok:
 	@docker run -it --rm --privileged -v /dev/bus/usb:/dev/bus/usb --workdir="/home/$(USER)" \

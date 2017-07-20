@@ -1,0 +1,14 @@
+FROM base
+
+# Install required packages
+# ruby required to install the asciidoctor gem
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    apt-get -y install \
+    make \
+    ruby \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install asciidoctor
+RUN gem install asciidoctor && \
+    gem install asciidoctor-pdf --pre
