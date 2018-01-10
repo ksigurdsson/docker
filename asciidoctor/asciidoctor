@@ -5,7 +5,7 @@
 # Put this script in $PATH as `asciidoctor`
 
 PROGNAME="$(basename $0)"
-VERSION="latest"
+VERSION="16.04"
 USER="$(whoami)"
 
 # Helper functions for guards

@@ -17,7 +17,7 @@ help:
 # Build Targets
 # -----------------------------------------------------------------------------
 
-build:
-	@docker build --file Dockerfile --tag asciidoctor:latest .
+build-1604:
+	@docker build --file Dockerfile-16.04 --tag asciidoctor:16.04 .
 
 .PHONY:	run
