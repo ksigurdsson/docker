@@ -24,9 +24,6 @@ help:
 # Build Targets
 # -----------------------------------------------------------------------------
 
-build-base:
-	@cd images/base; docker build -t base .
-
 build-vivado-2016-1:
 	@cd images/xilinx-vivado/2016-1; docker build -t vivado/2016-1 .
 
@@ -62,11 +59,6 @@ stop:
 # -----------------------------------------------------------------------------
 # Run Targets
 # -----------------------------------------------------------------------------
-
-run-base:
-	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
-	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
-	-e DISPLAY=$(IP):0 base tcsh
 
 run-vivado:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
