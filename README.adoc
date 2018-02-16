@@ -1,1 +1,20 @@
-# docker
+= Tools
+:author: Karl Sigurdsson
+:email: karl.sigurdsson@gmail.com
+:revnumber: v0.1
+:revdate: February 16, 2018
+:toc:
+:icons: font
+:quick-uri: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+
+== Overview
+
+This repository provides development tools that I use regularly. To make
+these tools portable across macOS, Linux and Windows they are typically
+packaged to run as Docker containers.
+
+== Prerequisites
+
+* Homebrew (macOS package manager)
+* Docker
+* Environment Modules
