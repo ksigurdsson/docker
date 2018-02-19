@@ -1,4 +1,4 @@
-FROM base
+FROM base:16.04
 
 # Install required packages
 # Icarus requires autoconf, gperf, flex, bison
