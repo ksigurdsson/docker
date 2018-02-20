@@ -4,7 +4,9 @@ FROM base:16.04
 # Icarus requires autoconf, gperf, flex, bison
 # Need xorg to launch gui apps
 # Need git to download Icarus source
-RUN apt-get -y update && apt-get install -y \
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
     build-essential \
     autoconf \
     gperf \

@@ -20,8 +20,6 @@ if { [uname machine] eq "x86_64" } {
 
 prepend-path PATH ${tool_home}
 
-set-alias docker-machine "docker-machine.exe"
-
 #----------------------------------------------------------------------
 proc ModulesHelp { } {
     global tool_version
