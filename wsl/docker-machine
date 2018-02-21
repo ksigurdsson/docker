@@ -23,4 +23,5 @@ check_cmd_in_path(){
 check_cmd_in_path $EXECUTABLE
 
 # Run the executable
-exec $EXECUTABLE "$@"
+WSLENV=$WSLENV:DOCKER_HOST/p $EXECUTABLE "$@"
+#exec WSLENV=$WSLENV:DOCKER_HOST/p $EXECUTABLE "$@"

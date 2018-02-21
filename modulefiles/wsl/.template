@@ -2,15 +2,16 @@
 #####################################################################
 ## Filename  : .template
 ## Type      : modulefile
-## Function  : Template modulefile for all docker releases
+## Function  : Template modulefile for wsl
 #####################################################################
 
 # Get version 
 set tool_version [file tail [module-info name]]
-set tool_home    /mnt/c/Program\ Files/Docker\ Toolbox
+set docker_home  /mnt/c/Program\ Files/Docker\ Toolbox
+set wsl_wrappers $env(HOME)/tools/wsl
 
 # allow only one version to be loaded
-conflict docker
+conflict wsl
 
 # Determine machine architecture to pull 32 or 64 bit binaries
 set hw_plat "linux"
@@ -18,7 +19,8 @@ if { [uname machine] eq "x86_64" } {
     append hw_plat "_x86_64"
 }
 
-prepend-path PATH ${tool_home}
+prepend-path PATH ${docker_home}
+prepend-path PATH ${wsl_wrappers}
 
 #----------------------------------------------------------------------
 proc ModulesHelp { } {
