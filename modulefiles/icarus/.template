@@ -1,0 +1,35 @@
+#%Module1.0
+#####################################################################
+## Filename  : .template
+## Type      : modulefile
+## Function  : Template modulefile
+#####################################################################
+
+# Get version 
+set tool_version [file tail [module-info name]]
+set icarus_wrappers $env(HOME)/tools/icarus-verilog
+
+# allow only one version to be loaded
+conflict icarus
+
+# Determine machine architecture to pull 32 or 64 bit binaries
+set hw_plat "linux"
+if { [uname machine] eq "x86_64" } {
+    append hw_plat "_x86_64"
+}
+
+prepend-path PATH ${icarus_wrappers}
+
+#----------------------------------------------------------------------
+proc ModulesHelp { } {
+    global tool_version
+    puts stderr "\tLoads the environment for Docker $tool_version\n"
+}
+
+module-whatis "Loads the environment for Docker"
+
+if { [ info exists env(MDEBUG) ] } {
+    puts stderr "\nDEBUG: Module:[module-info name]   Mode:[module-info mode]\n"
+    puts stderr "  PATH:$::env(PATH)]"
+    puts stderr ""
+}
