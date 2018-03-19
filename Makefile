@@ -30,9 +30,6 @@ build-vivado-2016-1:
 build-vivado-2016-3:
 	@cd images/xilinx-vivado/2016-3; docker build -t vivado/2016-3 .
 
-build-sigrok:
-	@cd images/sigrok; docker build -t sigrok .
-
 serve-src:
 	@cd images/src; python3.4 -m http.server --bind $(IP) 8000
 
@@ -56,11 +53,6 @@ run-vivado:
 	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
 	--volume="/Users/$(USER)/siglogic/asic-project:/home/$(USER)/asic-project:rw" \
 	-e DISPLAY=$(IP):0 vivado/2016-3 tcsh
-
-run-sigrok:
-	@docker run -it --rm --privileged -v /dev/bus/usb:/dev/bus/usb --workdir="/home/$(USER)" \
-	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
-	-e DISPLAY=$(IP):0 sigrok tcsh
 
 # -----------------------------------------------------------------------------
 # Misc Targets
