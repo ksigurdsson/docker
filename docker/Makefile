@@ -6,7 +6,6 @@
 # Variables
 # -----------------------------------------------------------------------------
 
-IP   = $(shell ifconfig en1 | grep inet | grep -v inet6 | awk '$$1=="inet" {print $$2}')
 USER = $(shell whoami)
 
 # -----------------------------------------------------------------------------
@@ -21,19 +20,49 @@ help:
 	@echo ""
 
 # -----------------------------------------------------------------------------
-# Build Targets
+# Docker Base Build Targets
 # -----------------------------------------------------------------------------
 
 build-1604:
 	@docker build --file Dockerfile-16.04 --tag base:16.04 .
 
 # -----------------------------------------------------------------------------
-# Run Targets
+# Docker Base Run Targets
 # -----------------------------------------------------------------------------
 
 run:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
 	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
-	-e DISPLAY=$(IP):0 base:16.04 tcsh
+	base:16.04 tcsh
+
+# -----------------------------------------------------------------------------
+# Docker Machine Targets
+# -----------------------------------------------------------------------------
+
+start:
+	@docker-machine start main
+	@docker-machine env main --shell=tcsh
+
+stop:
+	@docker-machine stop main
+
+# -----------------------------------------------------------------------------
+# Docker Misc Targets
+# -----------------------------------------------------------------------------
+
+list-cont:
+	@docker ps -a
+
+list-imag:
+	@docker images
+
+del-all-cont:
+	@docker rm `docker ps -a -q`
+
+del-all-imag:
+	@docker rmi `docker images -q `
+
+clean:
+	@rm ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
 
 .PHONY:	run
