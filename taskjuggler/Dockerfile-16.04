@@ -1,8 +1,10 @@
-FROM base
+FROM base:16.04
 
 # Install required packages
 # ruby required to install the taskjuggler gem
-RUN apt-get -y update && apt-get install -y \
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    apt-get -y install \
     make \
     ruby2.0 \
     && rm -rf /var/lib/apt/lists/* \
