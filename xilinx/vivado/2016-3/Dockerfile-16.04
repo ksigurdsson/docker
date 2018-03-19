@@ -1,10 +1,12 @@
-FROM base
+FROM base:16.04
 
 # Install required packages
 # Vivado requires GCC
 # Need xorg to launch gui apps
 # wget required for src upload
-RUN apt-get -y update && apt-get install -y \
+RUN apt-get -y update && \
+    apt-get -y upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install \
     build-essential \
     wget \
     xorg \
@@ -20,7 +22,7 @@ COPY install_config.txt /install/
 
 # Run the installer
 RUN cd /install \
-    && wget 192.168.1.16:8000/Xilinx_Vivado_SDK_2016.3_1011_1.tar.gz \
+    && wget 127.0.0.1:8000/Xilinx_Vivado_SDK_2016.3_1011_1.tar.gz \
     && tar zxvf Xilinx_Vivado_SDK_2016.3_1011_1.tar.gz \
     && cd Xilinx_Vivado_SDK_2016.3_1011_1 \
     && ./xsetup --agree XilinxEULA,3rdPartyEULA,WebTalkTerms --batch Install --config /install/install_config.txt \

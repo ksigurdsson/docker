@@ -21,19 +21,6 @@ help:
 	@echo ""
 
 # -----------------------------------------------------------------------------
-# Build Targets
-# -----------------------------------------------------------------------------
-
-build-vivado-2016-1:
-	@cd images/xilinx-vivado/2016-1; docker build -t vivado/2016-1 .
-
-build-vivado-2016-3:
-	@cd images/xilinx-vivado/2016-3; docker build -t vivado/2016-3 .
-
-serve-src:
-	@cd images/src; python3.4 -m http.server --bind $(IP) 8000
-
-# -----------------------------------------------------------------------------
 # Docker Machine Targets
 # -----------------------------------------------------------------------------
 
@@ -43,16 +30,6 @@ start:
 
 stop:
 	@docker-machine stop main
-
-# -----------------------------------------------------------------------------
-# Run Targets
-# -----------------------------------------------------------------------------
-
-run-vivado:
-	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
-	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
-	--volume="/Users/$(USER)/siglogic/asic-project:/home/$(USER)/asic-project:rw" \
-	-e DISPLAY=$(IP):0 vivado/2016-3 tcsh
 
 # -----------------------------------------------------------------------------
 # Misc Targets
