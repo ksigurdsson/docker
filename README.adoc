@@ -3,9 +3,11 @@
 :email: karl.sigurdsson@gmail.com
 :revnumber: v0.1
 :revdate: February 16, 2018
-:toc:
+:toc: left
+:toclevels: 3
 :icons: font
-:quick-uri: http://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+:sectnums:
+:sectnumlevels: 2
 
 == Overview
 
@@ -68,7 +70,7 @@ Install Docker
 === Windows
 
  module add docker
- docker-machine create --driver virtualbox main
+ docker-machine create --driver virtualbox --virtualbox-memory=4096 --virtualbox-cpu-count=2 --virtualbox-disk-size=20000 main
  
 == Start Docker Machine
 
