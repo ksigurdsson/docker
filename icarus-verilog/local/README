@@ -1,0 +1,16 @@
+# Package dependencies:
+sudo apt install build-essential autoconf gperf flex bison
+
+# Install
+mkdir -p src vXXXXXXX
+cd src
+git clone https://github.com/steveicarus/iverilog.git
+cd iverilog
+sh autoconf.sh
+./configure --prefix=${HOME}/tools/icarus-verilog/local/v11
+make
+make install
+
+# Clean up
+cd ${HOME}/tools/icarus-verilog/local
+rm -rf src
