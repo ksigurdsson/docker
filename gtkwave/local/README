@@ -1,0 +1,16 @@
+# Package dependencies:
+sudo apt install tcl-dev tk-dev gperf libgtk2.0-dev
+
+# Install
+mkdir -p src v3.3.92
+cd src
+wget http://gtkwave.sourceforge.net/gtkwave-3.3.92.tar.gz
+tar zxf gtkwave-3.3.92.tar.gz
+cd gtkwave-3.3.92
+./configure --prefix=${HOME}/tools/gtkwave/local/v3.3.92 --disable-xz
+make
+make install
+
+# Clean up
+cd ${HOME}/tools/gtkwave/local
+rm -rf src
