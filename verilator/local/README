@@ -1,0 +1,27 @@
+# Package dependencies:
+sudo apt install git make autoconf g++ flex bison
+
+# Install
+mkdir -p src
+cd src
+git clone http://git.veripool.org/git/verilator
+
+unsetenv VERILATOR_ROOT
+cd verilator
+git pull                  # Make sure we're up-to-date
+git tag                   # See what versions exist
+#git checkout master      # Use development branch (e.g. recent bug fix)
+#git checkout stable      # Use most recent release
+#git checkout v{version}  # Switch to specified release version
+
+#mkdir -p ../../v{version}
+mkdir -p ../../v4.002
+
+sh autoconf.sh
+./configure --prefix=${HOME}/tools/verilator/local/v4.002
+make
+make install
+
+# Clean up
+cd ${HOME}/tools/verilator/local
+rm -rf src
