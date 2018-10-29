@@ -24,7 +24,10 @@ help:
 # -----------------------------------------------------------------------------
 
 build-1604:
-	@docker build --file Dockerfile-16.04 --tag base:16.04 .
+	@docker build \
+		--build-arg username=$(USER) \
+		--file Dockerfile-16.04 \
+		--tag base:16.04 .
 
 # -----------------------------------------------------------------------------
 # Docker Base Run Targets
@@ -32,7 +35,7 @@ build-1604:
 
 run:
 	@docker run -it --rm --user=$(USER) --workdir="/home/$(USER)" \
-	--volume="/Users/$(USER)/siglogic/docker/home:/home/$(USER):rw" \
+	--volume="$(HOME):/home/$(USER):rw" \
 	base:16.04 tcsh
 
 # -----------------------------------------------------------------------------
@@ -60,7 +63,7 @@ del-all-cont:
 	@docker rm `docker ps -a -q`
 
 del-all-imag:
-	@docker rmi `docker images -q `
+	@docker rmi `docker images -q`
 
 clean:
 	@rm ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2

@@ -9,15 +9,18 @@ RUN apt-get -y update && \
 # Create the staff group
 #RUN addgroup --gid 20 staff
 
-# Create the karl user in the image
+# Username is passed in as a build argument
+ARG username
+
+# Create the user in the image
 RUN adduser --disabled-login \
             --gecos '' \
-            --home /home/karl \
+            --home /home/${username} \
             --shell /bin/tcsh \
-            karl
-#            --gid 20 -uid 501 karl 
+            ${username}
+#            --gid 20 -uid 501 ${username}
 
 #CMD [ "konsole", "-e", "/bin/bash" ]
 
-#USER karl
-#WORKDIR /home/karl
+#USER ${username}
+#WORKDIR /home/${username}
