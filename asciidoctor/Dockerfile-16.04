@@ -10,5 +10,8 @@ RUN apt-get -y update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Install asciidoctor
+# Note: to install a gem into home area (not requiring root priviledges)
+# setenv GEM_HOME $HOME/.gems
+
 RUN gem install asciidoctor && \
     gem install asciidoctor-pdf --pre
