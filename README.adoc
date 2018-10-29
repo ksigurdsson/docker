@@ -83,3 +83,14 @@ Install Docker
 == Stop Docker Machine
 
  docker-machine stop main
+
+== Windows WSL Usage Instructions
+
+. Enable the WSL tools
+ module add wsl
+. Start docker machine
+ docker-machine start main
+. Setup docker machine
+ docker-machine env main --shell=tcsh
+. Now set the environment variables - converting to a wsl path (script this
+ in future)
